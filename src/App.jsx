@@ -113,7 +113,7 @@ export default class App extends Component {
       const {activeTasks,newTodoValue} = this.state;
       const newActive=[...activeTasks]
       
-      const existsOrNot=newActive.some(item=>item.title===newTodoValue)
+      const existsOrNot=newActive.some(item=>item.title.toLowerCase()===newTodoValue.toLowerCase())
       // console.log("maxxxxxx",Math.max(...newArray)+1)
       if(newTodoValue!=='' && !existsOrNot){
         const newObj= {}
@@ -131,8 +131,10 @@ export default class App extends Component {
       // this.setState({})
       if(existsOrNot){
         this.setState({textHead:true})
+        setTimeout(() => {
+        this.setState({textHead:false})
+      }, 3000)
       }
-    
      
     }
 
@@ -143,22 +145,26 @@ export default class App extends Component {
     }
   render() {
     // console.log(this.state.newTodoValue)
-    const {todo,activeTasks,doneTasks,textHead,doneOrActive, isLoading} = this.state
+    const {todo,activeTasks,doneTasks,textHead,doneOrActive, isLoading,newTodoValue} = this.state
     let clicked= doneOrActive ? doneTasks : activeTasks; 
     
-    const textcontent = textHead && <div className='message'><h4>Todo Already exist</h4></div>
-    
-    const loadContent = !isLoading ? <Spinner color="primary" />:<Todolist todo={clicked} remove={this.remove} done={this.done} unDone={this.unDone} doneOrActive={doneOrActive}/>
+    const textcontent = textHead && <div className='message'><h4>{newTodoValue} :Already exist</h4></div>
+ 
+    const loadContent = !isLoading ? <Spinner  color="primary" />:<Todolist todo={clicked} remove={this.remove} done={this.done} unDone={this.unDone} doneOrActive={doneOrActive}/>
+  
+   
     return (
       <Router>
         <Switch>
           <Route exact path="/">
             <div className='App'>
               <div className='header'>
-              
               {textcontent}
+             
+              <div className='input-and-add'>
               <Input onChange={this.changeNewTodo} value={this.state.newTodoValue} />
               <Button onClick={this.addNewTodo} color="primary">Add</Button>
+              </div>
               </div>
 
               <div>

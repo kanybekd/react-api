@@ -7,25 +7,23 @@
 
 .header{
   display:flex;
-  position: relative;
+  flex-direction: column;
 }
 .container{
   display:flex;
   justify-content: flex-end;
-}
-.container1{
-  display:flex;
-  justify-content: flex-end;
   margin-right: 90px;
 }
+
 .message{
-  /* border: 1px solid red; */
-  /* display: flex; */
-  /* justify-content: center; */
-  position: absolute;
-  top:-50px;
-  text-align: center;
-  left:40%;
+display: flex;
+justify-content: center;
 
 }
 
+.input-and-add{
+  display: flex;
+}
+#spin{
+  margin-left:0 auto;
+}
