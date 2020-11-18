@@ -6,29 +6,28 @@ import {Input,Button} from 'reactstrap'
 class Edit extends Component {
     constructor(props) {
         super(props)
-        const {todo}=props;
+        const {todo} = props;
         const {id} = props.match.params;
-        const singleTodo=todo.find(item=>item.id===+id)
+        const singleTodo = todo.find(item => item.id === +id)
         this.state = {
-            inputValue:singleTodo.title,
-            id:singleTodo.id,
+            inputValue: singleTodo.title,
+            id: singleTodo.id,
             singleTodo
         }
     }
-    goBack=()=>{
+    goBack = () => {
         this.props.history.push('/')
     }
-    onChange=(e)=>{
-        const {inputValue}=this.state
+    onChange = (e) => {
         this.setState({inputValue:e.target.value})
     }
 
-    cancel=()=>{
+    cancel = () => {
         const {singleTodo} = this.state
         this.setState({inputValue:singleTodo.title})
     }
     render() {
-        const {inputValue,id}=this.state
+        const {inputValue, id}=this.state
         return (
             <div className='App'>
                 <Button onClick={this.goBack} color="secondary" className='mb-3'>Go Back</Button>
