@@ -123,6 +123,7 @@ export default class App extends Component {
       this.setState({activeTasks, newTodoValue: '', textHead: false})
       localStorage.setItem('activeTasks', JSON.stringify(activeTasks))
     }
+
     if(existsOrNot){
       this.setState({textHead: true})
       setTimeout(() => {
@@ -136,11 +137,23 @@ export default class App extends Component {
   }
 
   render() {
+
     const { activeTasks, doneTasks, textHead, doneOrActive, isLoading, newTodoValue} = this.state
     const ind = activeTasks.findIndex(item => item.title === newTodoValue);
     let clicked = doneOrActive ? doneTasks : activeTasks; 
     const textcontent = textHead && <div className ='message'><h4>"{newTodoValue}" Already exist. Check item # {ind+1}</h4></div>
     const loadContent = !isLoading ? <div className="spinner"><Spinner color="primary" /></div> : <Todolist todo={clicked} remove={this.remove} done={this.done} unDone={this.unDone} doneOrActive={doneOrActive}/>
+
+    // console.log(this.state.newTodoValue)
+    const {todo,activeTasks,doneTasks,textHead,doneOrActive, isLoading,newTodoValue} = this.state
+    let clicked= doneOrActive ? doneTasks : activeTasks; 
+    
+    const textcontent = textHead && <div className='message'><h4>{newTodoValue} :Already exist</h4></div>
+ 
+    const loadContent = !isLoading ? <Spinner  color="primary" />:<Todolist todo={clicked} remove={this.remove} done={this.done} unDone={this.unDone} doneOrActive={doneOrActive}/>
+  
+   
+
     return (
       <Router>
         <Switch>
@@ -148,9 +161,16 @@ export default class App extends Component {
             <div className='App'>
               <div className='header'>
               {textcontent}
+             
+              <div className='input-and-add'>
               <Input onChange={this.changeNewTodo} value={this.state.newTodoValue} />
               <Button onClick={this.addNewTodo} color="primary">Add</Button>
               </div>
+
+
+              </div>
+
+
               <div>
                 <Button onClick={this.activeClicked} color="primary" className="my-2 mr-2">Active tasks {activeTasks.length}</Button>
                 <Button onClick={this.doneClicked} color="secondary" className="my-2">Done {doneTasks.length}</Button>
