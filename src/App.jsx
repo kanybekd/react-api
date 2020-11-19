@@ -144,14 +144,8 @@ export default class App extends Component {
     const textcontent = textHead && <div className ='message'><h4>"{newTodoValue}" Already exist. Check item # {ind+1}</h4></div>
     const loadContent = !isLoading ? <div className="spinner"><Spinner color="primary" /></div> : <Todolist todo={clicked} remove={this.remove} done={this.done} unDone={this.unDone} doneOrActive={doneOrActive}/>
 
-    // console.log(this.state.newTodoValue)
-    const {todo,activeTasks,doneTasks,textHead,doneOrActive, isLoading,newTodoValue} = this.state
-    let clicked= doneOrActive ? doneTasks : activeTasks; 
+
     
-    const textcontent = textHead && <div className='message'><h4>{newTodoValue} :Already exist</h4></div>
- 
-    const loadContent = !isLoading ? <Spinner  color="primary" />:<Todolist todo={clicked} remove={this.remove} done={this.done} unDone={this.unDone} doneOrActive={doneOrActive}/>
-  
    
 
     return (
