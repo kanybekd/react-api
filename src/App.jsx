@@ -42,14 +42,14 @@ export default class App extends Component {
   }
   doneClicked = () => {
     let {doneTasks, activeTasks} = this.state;
-    doneTasks = JSON.parse(localStorage.getItem('doneTasks'))
-    activeTasks = JSON.parse(localStorage.getItem('activeTasks'))
+    doneTasks = JSON.parse(localStorage.getItem('doneTasks')) || doneTasks
+    activeTasks = JSON.parse(localStorage.getItem('activeTasks')) || activeTasks
     this.setState({doneTasks, activeTasks, doneOrActive: true})
   }
   activeClicked = () => {
     let {doneTasks, activeTasks} = this.state;
-    doneTasks = JSON.parse(localStorage.getItem('doneTasks'))
-    activeTasks = JSON.parse(localStorage.getItem('activeTasks'))
+    doneTasks = JSON.parse(localStorage.getItem('doneTasks')) || doneTasks
+    activeTasks = JSON.parse(localStorage.getItem('activeTasks')) || activeTasks
     this.setState({doneTasks, activeTasks, doneOrActive: false})
   }
   remove = (id) => {
