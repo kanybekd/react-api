@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
-
 import {Input,Button} from 'reactstrap'
-
 class Edit extends Component {
     constructor(props) {
         super(props)
@@ -21,7 +19,6 @@ class Edit extends Component {
     onChange = (e) => {
         this.setState({inputValue:e.target.value})
     }
-
     cancel = () => {
         const {singleTodo} = this.state
         this.setState({inputValue:singleTodo.title})
@@ -41,5 +38,4 @@ class Edit extends Component {
         )
     }
 }
-
 export default withRouter(Edit)

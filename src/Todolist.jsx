@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {Table,Button} from "reactstrap";
 import {Link} from "react-router-dom"
-
 class Todolist extends Component {
-
     render() {
         const {todo, doneOrActive}=this.props;
         return (
@@ -47,5 +45,4 @@ class Todolist extends Component {
         )
     }
 }
-
 export default Todolist;

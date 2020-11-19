@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Switch,Route} from "react-router-dom"
 import Edit from "./Edit.jsx"
 import "./App.css"
 import Todolist from './Todolist'
-
 export default class App extends Component {
   constructor() {
     super()
@@ -47,14 +46,12 @@ export default class App extends Component {
     activeTasks = JSON.parse(localStorage.getItem('activeTasks'))
     this.setState({doneTasks, activeTasks, doneOrActive: true})
   }
-
   activeClicked = () => {
     let {doneTasks, activeTasks} = this.state;
     doneTasks = JSON.parse(localStorage.getItem('doneTasks'))
     activeTasks = JSON.parse(localStorage.getItem('activeTasks'))
     this.setState({doneTasks, activeTasks, doneOrActive: false})
   }
-
   remove = (id) => {
     const {doneTasks,activeTasks} = this.state;
     const ind1 = doneTasks.findIndex(item => item.id === id)
@@ -70,7 +67,6 @@ export default class App extends Component {
     localStorage.setItem('activeTasks', JSON.stringify(activeTasks))
     localStorage.setItem('doneTasks', JSON.stringify(doneTasks))
   }
-
   done = (id) => {
     const {doneTasks, activeTasks} = this.state;
     activeTasks.forEach(item => {
@@ -82,7 +78,6 @@ export default class App extends Component {
     localStorage.setItem('activeTasks', JSON.stringify(activeTasks))
     localStorage.setItem('doneTasks', JSON.stringify(doneTasks))
   }
-
   unDone = (id) => {
     const {doneTasks,activeTasks} = this.state;
     doneTasks.forEach(item => {
@@ -94,7 +89,6 @@ export default class App extends Component {
     localStorage.setItem('activeTasks', JSON.stringify(activeTasks))
     localStorage.setItem('doneTasks', JSON.stringify(doneTasks))
   }
-
   saveOnEdit=(todo,id) => {
     const {doneTasks, activeTasks} = this.state;
     doneTasks.forEach(item => {
@@ -107,7 +101,6 @@ export default class App extends Component {
     localStorage.setItem('activeTasks', JSON.stringify(activeTasks))
     localStorage.setItem('doneTasks', JSON.stringify(doneTasks))
   }
-
   addNewTodo = () => {
     const {activeTasks, newTodoValue} = this.state;
     const existsOrNot = activeTasks.some(item => item.title === newTodoValue)
@@ -123,7 +116,6 @@ export default class App extends Component {
       this.setState({activeTasks, newTodoValue: '', textHead: false})
       localStorage.setItem('activeTasks', JSON.stringify(activeTasks))
     }
-
     if(existsOrNot){
       this.setState({textHead: true})
       setTimeout(() => {
@@ -131,23 +123,15 @@ export default class App extends Component {
       }, 3000)
     }
 }
-
   changeNewTodo = (e) => {
     this.setState({newTodoValue: e.target.value})
   }
-
   render() {
-
     const { activeTasks, doneTasks, textHead, doneOrActive, isLoading, newTodoValue} = this.state
     const ind = activeTasks.findIndex(item => item.title === newTodoValue);
     let clicked = doneOrActive ? doneTasks : activeTasks; 
     const textcontent = textHead && <div className ='message'><h4>"{newTodoValue}" Already exist. Check item # {ind+1}</h4></div>
     const loadContent = !isLoading ? <div className="spinner"><Spinner color="primary" /></div> : <Todolist todo={clicked} remove={this.remove} done={this.done} unDone={this.unDone} doneOrActive={doneOrActive}/>
-
-
-    
-   
-
     return (
       <Router>
         <Switch>
@@ -155,16 +139,9 @@ export default class App extends Component {
             <div className='App'>
               <div className='header'>
               {textcontent}
-             
-              <div className='input-and-add'>
               <Input onChange={this.changeNewTodo} value={this.state.newTodoValue} />
               <Button onClick={this.addNewTodo} color="primary">Add</Button>
               </div>
-
-
-              </div>
-
-
               <div>
                 <Button onClick={this.activeClicked} color="primary" className="my-2 mr-2">Active tasks {activeTasks.length}</Button>
                 <Button onClick={this.doneClicked} color="secondary" className="my-2">Done {doneTasks.length}</Button>
