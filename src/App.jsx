@@ -48,6 +48,7 @@ export default class App extends Component {
   }
   activeClicked = () => {
     let {doneTasks, activeTasks} = this.state;
+    
     doneTasks = JSON.parse(localStorage.getItem('doneTasks')) || doneTasks
     activeTasks = JSON.parse(localStorage.getItem('activeTasks')) || activeTasks
     this.setState({doneTasks, activeTasks, doneOrActive: false})
